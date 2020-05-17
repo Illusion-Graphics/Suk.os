@@ -29,7 +29,7 @@ export OPTIMIZATION_FLAGS = -O3
 export CFLAGS = ${COMPILATION_FLAGS} ${ERROR_FLAGS} ${FEATURE_FLAGS} ${OPTIMIZATION_FLAGS} -g
 export CPPFLAGS = ${COMPILATION_FLAGS} ${ERROR_FLAGS} ${FEATURE_FLAGS} ${FEATURE_CPP_FLAGS} ${OPTIMIZATION_FLAGS} -g
 
-all: clean checkdirs boot drivers kernel kernel.img
+all: clean checkdirs boot drivers kernel ext kernel.img
 
 boot:
 	@$(MAKE) -C boot
@@ -40,6 +40,9 @@ drivers:
 
 kernel:
 	@$(MAKE) -C kernel
+
+ext:
+	@$(MAKE) -C ext
 
 kernel.img:
 	$(LD) -m aarch64elf -nostdlib $(OBJS) -T boot/link.ld -o $(BUILD_DIR)kernel.elf
